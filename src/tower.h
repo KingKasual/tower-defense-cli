@@ -26,6 +26,9 @@ class Tower {
 
     void Update(std::vector<Enemy*> enemies, std::vector<Bullet>& bullets);
 
+    Enemy* FindClosestEnemy(const std::vector<Enemy*>& enemies);
+    int CalculateDistance(const Vector2D& pos1, const Vector2D& pos2);
+
     bool GetAutoFire() const;
     void SetAutoFire(bool autoFire);
     void ManualFire(std::vector<Enemy*> enemies,

@@ -3,6 +3,8 @@
 #include "logger.h"
 
 #include <iomanip>
+#include <sstream>
+#include <chrono>
 #include <iostream>
 #include <thread>
 
@@ -48,3 +50,13 @@ std::string Logger::GetCurrentTimestamp() {
     ss << std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %X");
     return ss.str();
 }
+
+void Logger::Log(const std::string& log) {
+    std::string timestampedLog = GetCurrentTimestamp() + " " + log;
+    logQueue.push_back(timestampedLog);
+}
+
+void Logger::Flush() {
+    logFile.flush();
+}
+

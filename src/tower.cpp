@@ -4,6 +4,7 @@
 #include "logger.h"
 
 #include <limits>
+#include <cmath>
 
 Tower::Tower(int x, int y, int rateOfFire)
     : position({x, y}),
@@ -59,4 +60,28 @@ void Tower::FireBulletAtEnemy(Enemy& enemy, std::vector<Bullet>& bullets) {
     if (enemy.GetPosition().y < position.y) direction.y = -1;
 
     bullets.emplace_back(position, direction);
+}
+
+Enemy* Tower::FindClosestEnemy(const std::vector<Enemy*>& enemies) {
+    Enemy* closestEnemy = nullptr;
+    int closestDistance = INT_MAX;
+
+    for (Enemy* enemy : enemies) {
+        if (enemy->IsActive()) {
+            int distance = CalculateDistance(enemy->GetPosition(), position);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+    }
+
+    return closestEnemy;
+}
+
+// Calculate the distance between two positions (not going to lie, this one I needed a refresher on)
+int Tower::CalculateDistance(const Vector2D& pos1, const Vector2D& pos2) {
+    int dx = pos1.x - pos2.x;
+    int dy = pos1.y - pos2.y;
+    return static_cast<int>(std::sqrt(dx * dx + dy * dy));
 }

@@ -1,0 +1,3 @@
+C:/Windows/system32/tower-defense-cli/build/Release-Windows/CMakeFiles/tower-defense-cli.dir
+C:/Windows/system32/tower-defense-cli/build/Release-Windows/CMakeFiles/edit_cache.dir
+C:/Windows/system32/tower-defense-cli/build/Release-Windows/CMakeFiles/rebuild_cache.dir

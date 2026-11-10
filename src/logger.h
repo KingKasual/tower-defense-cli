@@ -19,6 +19,9 @@ class Logger {
 
     ~Logger();
 
+    void Log(const std::string& log);
+    void Flush();
+
    private:
     Logger();
 
@@ -26,6 +29,8 @@ class Logger {
     std::thread logThread;
     std::vector<std::string> logQueue;
     bool exitFlag = false;
+
+    
 
     void ProcessLogs();
     std::string GetCurrentTimestamp();

@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <list>
+#include <vector>
 
 #include "enemy.h"
 
@@ -18,6 +19,13 @@ class Pooler {
    public:
     Pooler(size_t minimumPoolSize);
     size_t PoolSize();
+    
+    //My methods
+    void Clear();
+    void DespawnEnemy(Enemy* enemy);
+    std::vector<Enemy*> GetActiveEnemies();
+    Enemy* SpawnEnemy(const Vector2D& spawnPosition);
+
 
    private:
     std::list<Enemy*> enemies;
