@@ -28,17 +28,18 @@ void Tower::FireAtEnemy(const std::vector<Enemy*>& enemies,
 
     if (timeElapsed >= std::chrono::milliseconds(rateOfFire)) {
         Enemy* closestEnemy = FindClosestEnemy(enemies);
+        if (closestEnemy != nullptr) {
+            if (bAutoFire) {
+                int distance = CalculateDistance(closestEnemy->GetPosition(), position);
 
-        if (bAutoFire) {
-            int distance = CalculateDistance(closestEnemy->GetPosition(), position);
-
-            if (distance <= ENEMYRANGE) {
+                if (distance <= ENEMYRANGE) {
+                    FireBulletAtEnemy(*closestEnemy, bullets);
+                    lastFireTime = currentTime;
+                }
+            } else {
                 FireBulletAtEnemy(*closestEnemy, bullets);
                 lastFireTime = currentTime;
             }
-        } else {
-            FireBulletAtEnemy(*closestEnemy, bullets);
-            lastFireTime = currentTime;
         }
     }
 }
@@ -67,7 +68,7 @@ Enemy* Tower::FindClosestEnemy(const std::vector<Enemy*>& enemies) {
     int closestDistance = INT_MAX;
 
     for (Enemy* enemy : enemies) {
-        if (enemy->IsActive()) {
+        if (enemy && enemy->IsActive()) {
             int distance = CalculateDistance(enemy->GetPosition(), position);
             if (distance < closestDistance) {
                 closestDistance = distance;

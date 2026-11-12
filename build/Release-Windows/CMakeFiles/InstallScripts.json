@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"C:/Windows/system32/tower-defense-cli/build/Release-Windows/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
